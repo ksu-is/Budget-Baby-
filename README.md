@@ -1,82 +1,39 @@
 # Budget-Baby-
 “Budget Baby” will display a budgeting tool. This budgeting tool will be beneficial to anyone serious about their finances. My program will insist in expenses, revenue, and your designated budgeted balance. It will add up all of your input totals and generate your proper budget balance. 
 
-#Main Menu
 
- def main():
-            totalBudget = 2500
 
-    choice = 0
-    while choice != '5':
-        print ("Welcome to Budget Baby") 
-        print ("1 = Add an Expense")
-        print ("2 = Remove an Expense")
-        print ("3 = Add Revenue")
-        print ("4 = Remove Revenue")
-        print  ("5 = Exit")
-        choice = raw_input('Enter your selection:')
-        if choice == '1':
-            totalBudget = addExpense(totalBudget)
-        elif choice == '2':
-            totalBudget = removeExpense(totalBudget)
-        elif choice == '3':
-            totalBudget = addRevenue(totalBudget)
-        elif choice == '4':
-            totalBudget = removeRevenue(totalBudget)
-        elif choice == '5':
-            print ("Goodbye!")
-        else:
+#Main Module
+expense = 0.0
+budget = 0.0
+difference = 0.0
+expenseTotal = 0.0
 
-            print ("***Invalid entry! Please enter 1-5***")
-#Add expense 
+total_expense = 0
+keep_going = 'y'
 
-def addExpense(totalBudget):
-        bill = int(raw_input('Enter the Expense amount:'))
-    manyBill = int(raw_input('Enter the frequency of the Expense per month:'))
-    totalBill = bill * manyBill
-    totalBudget = totalBudget - totalBill
-    checkBudget(totalBudget)
-    return totalBudget
 
-#Remove expense 
+#Input Module
+budget = float(input("What is your budget for the month?"))
+print("Please begin entering the amounts of each of your monthly expenses:")
 
-def removeExpense(totalBudget):
-        lessBill = int(raw_input('Enter the amount to remove:'))
-    manyLess = int(raw_input('Enter the frequency of the Expense Removal per month:'))
-    totalLess = lessBill * manyLess
-    if totalLess <= (totalBudget):
-        totalBudget = totalBudget + totalLess
-        checkBudget(totalBudget)
-    else:
-        print ("*ERROR* re-check the amounts entered")
-        return totalBudget
+while keep_going == 'y':
+    expense = float(input("Monthly expense amount? $"))
+#*Having an issue keeping the expense running total at the end of the program?*
+    total_expense = total_expense + expense
+    keep_going = input("Do you have any other expenses? (Enter y for yes.)")
 
-#Add Revenue 
+#Calculations Module
+if expense < budget:
+    difference = budget - expense
+    print("You were $", difference, " under budget.")
 
-def addRevenue(totalBudget):
-        income = int(raw_input('Enter the amount of additional income:'))
-    totalBudget = totalBudget + income
-    checkBudget(totalBudget)
-    return totalBudget
+elif expense > budget:
+    difference = expense - budget
+    print("You were $", difference, " over budget.")
 
-#Remove revenue 
+else:
+    print("You were right on budget. Great Job!!!")
 
-def removeRevenue(totalBudget):
-        lossincome = int(raw_input('Enter the amount of income to be removed:'))
-    totalBudget = totalBudget - lossincome
-    checkBudget(totalBudget)
-    return totalBudget
 
-#Checks and reports balance
-
-def checkBudget(totalBudget):
-        if totalBudget >= (0):
-            print ("The remaining budget is: ', totalBudget")
-if totalBudget <= (0):
-
-        print ("You have exceeded the monthly budget")
-
-        print ("Re-evaluate your expenses and balance the budget")
-
-        print ("Current balance:', totalBudget")
-main()
+input("Press enter to exit.")
